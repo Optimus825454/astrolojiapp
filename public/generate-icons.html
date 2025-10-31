@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ASTROVISION Icon Generator</title>
+    <style>
+        body {
+            background: #0a0a0f;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        canvas {
+            border: 2px solid #8a2be2;
+            margin: 10px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #8a2be2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ASTROVISION Icon Generator</h1>
+    <p>Icons will be automatically downloaded...</p>
+    <canvas id="canvas192" width="192" height="192"></canvas>
+    <canvas id="canvas512" width="512" height="512"></canvas>
+
+    <script>
+        function createIcon( canvas, size ) {
+            const ctx = canvas.getContext( '2d' );
+
+            // Background - Dark cosmic gradient
+            const bgGradient = ctx.createRadialGradient( size / 2, size / 2, 0, size / 2, size / 2, size / 2 );
+            bgGradient.addColorStop( 0, '#1a0b2e' );
+            bgGradient.addColorStop( 0.5, '#0a0a0f' );
+            bgGradient.addColorStop( 1, '#000000' );
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect( 0, 0, size, size );
+
+            // Outer circle glow
+            const glowGradient = ctx.createRadialGradient( size / 2, size / 2, size * 0.35, size / 2, size / 2, size * 0.45 );
+            glowGradient.addColorStop( 0, 'rgba(138, 43, 226, 0.8)' );
+            glowGradient.addColorStop( 0.5, 'rgba(138, 43, 226, 0.4)' );
+            glowGradient.addColorStop( 1, 'rgba(138, 43, 226, 0)' );
+            ctx.fillStyle = glowGradient;
+            ctx.beginPath();
+            ctx.arc( size / 2, size / 2, size * 0.45, 0, 2 * Math.PI );
+            ctx.fill();
+
+            // Main circle
+            const mainGradient = ctx.createRadialGradient( size / 2, size / 2, 0, size / 2, size / 2, size * 0.35 );
+            mainGradient.addColorStop( 0, '#6366f1' );
+            mainGradient.addColorStop( 0.5, '#8a2be2' );
+            mainGradient.addColorStop( 1, '#4b0082' );
+            ctx.fillStyle = mainGradient;
+            ctx.beginPath();
+            ctx.arc( size / 2, size / 2, size * 0.35, 0, 2 * Math.PI );
+            ctx.fill();
+
+            // Inner ring
+            ctx.strokeStyle = '#e0e7ff';
+            ctx.lineWidth = size * 0.02;
+            ctx.beginPath();
+            ctx.arc( size / 2, size / 2, size * 0.28, 0, 2 * Math.PI );
+            ctx.stroke();
+
+            // Stars - draw small stars around
+            ctx.fillStyle = '#ffffff';
+            for ( let i = 0; i < 8; i++ ) {
+                const angle = ( i * Math.PI * 2 ) / 8;
+                const x = size / 2 + Math.cos( angle ) * size * 0.4;
+                const y = size / 2 + Math.sin( angle ) * size * 0.4;
+                ctx.beginPath();
+                ctx.arc( x, y, size * 0.008, 0, 2 * Math.PI );
+                ctx.fill();
+            }
+
+            // Center text - AV (AstroVision)
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${size * 0.18}px 'Arial', sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
+            ctx.shadowBlur = size * 0.02;
+            ctx.fillText( 'AV', size / 2, size / 2 );
+            ctx.shadowBlur = 0;
+
+            // Download
+            const link = document.createElement( 'a' );
+            link.download = `astrovision-icon-${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Generate icons after page load
+        setTimeout( () => {
+            createIcon( document.getElementById( 'canvas192' ), 192 );
+            createIcon( document.getElementById( 'canvas512' ), 512 );
+            alert( 'ASTROVISION icons generated! Check your downloads folder.' );
+        }, 500 );
+    </script>
+</body>
+
+</html>

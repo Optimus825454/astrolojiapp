@@ -1,0 +1,50 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="256" fill="#0a0a0f"/>
+
+  <!-- Cosmic Gradient Background -->
+  <defs>
+    <linearGradient id="cosmicGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="starGradient">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.3" />
+    </radialGradient>
+  </defs>
+
+  <!-- Outer Ring -->
+  <circle cx="256" cy="256" r="200" stroke="url(#cosmicGradient)" stroke-width="8" fill="none" opacity="0.6"/>
+
+  <!-- Inner Ring -->
+  <circle cx="256" cy="256" r="150" stroke="url(#cosmicGradient)" stroke-width="4" fill="none" opacity="0.4"/>
+
+  <!-- Zodiac Circle -->
+  <circle cx="256" cy="256" r="100" stroke="#6366f1" stroke-width="3" fill="none" opacity="0.8"/>
+
+  <!-- Stars -->
+  <circle cx="200" cy="150" r="3" fill="url(#starGradient)"/>
+  <circle cx="320" cy="180" r="2" fill="url(#starGradient)"/>
+  <circle cx="280" cy="320" r="2.5" fill="url(#starGradient)"/>
+  <circle cx="180" cy="280" r="2" fill="url(#starGradient)"/>
+  <circle cx="340" cy="260" r="3" fill="url(#starGradient)"/>
+  <circle cx="220" cy="340" r="2" fill="url(#starGradient)"/>
+
+  <!-- Central Planet -->
+  <circle cx="256" cy="256" r="40" fill="url(#cosmicGradient)" opacity="0.9"/>
+  <circle cx="256" cy="256" r="35" fill="#0a0a0f" opacity="0.5"/>
+  <circle cx="256" cy="256" r="30" fill="url(#cosmicGradient)"/>
+
+  <!-- Planet Glow -->
+  <circle cx="256" cy="256" r="45" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.5">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Aries Symbol (simplified) -->
+  <text x="256" y="140" font-family="Arial, sans-serif" font-size="32" fill="#06b6d4" text-anchor="middle">♈</text>
+
+  <!-- Text: KozmikHarita -->
+  <text x="256" y="420" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="url(#cosmicGradient)" text-anchor="middle">KozmikHarita</text>
+</svg>

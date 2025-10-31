@@ -1,0 +1,76 @@
+{
+  "name": "AstroVision - AI Destekli Astroloji Haritaları",
+  "short_name": "AstroVision",
+  "description": "Doğum haritanızı hesaplayın, transit haritalarını keşfedin. Yapay zeka ile astroloji yorumları alın.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "tr",
+  "categories": ["lifestyle", "entertainment", "utilities"],
+  "screenshots": [
+    {
+      "src": "/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "AstroVision Ana Sayfa"
+    },
+    {
+      "src": "/screenshot-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "AstroVision Mobil Görünüm"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Yeni Harita Hesapla",
+      "short_name": "Yeni Harita",
+      "description": "Hızlıca yeni bir doğum haritası hesaplayın",
+      "url": "/?action=new-chart",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Transit Hesapla",
+      "short_name": "Transit",
+      "description": "Transit haritası hesapla",
+      "url": "/?action=transit",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}
