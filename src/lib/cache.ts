@@ -19,7 +19,7 @@ interface CacheConfig {
 }
 
 class AstroAppCache {
-  private cache = new Map<string, CacheEntry<any>>();
+  private cache = new Map<string, CacheEntry<unknown>>();
   private config: CacheConfig;
   private accessOrder: string[] = []; // For LRU eviction
 
@@ -30,10 +30,12 @@ class AstroAppCache {
   /**
    * Generate cache key from parameters
    */
-  private generateKey(prefix: string, ...args: any[]): string {
+  public generateKey(prefix: string, ...args: unknown[]): string {
     const keyData = args
       .map((arg) =>
-        typeof arg === "object" ? JSON.stringify(arg) : String(arg)
+        typeof arg === "object" && arg !== null
+          ? JSON.stringify(arg)
+          : String(arg)
       )
       .join("|");
 
@@ -72,7 +74,7 @@ class AstroAppCache {
     // Update access order for LRU
     this.updateAccessOrder(key);
 
-    return entry.data;
+    return entry.data as T;
   }
 
   /**
@@ -93,7 +95,7 @@ class AstroAppCache {
       this.evictOldest();
     }
 
-    this.cache.set(key, entry);
+    this.cache.set(key, entry as CacheEntry<unknown>);
     this.updateAccessOrder(key);
   }
 
@@ -185,24 +187,28 @@ const defaultCache = new AstroAppCache({
 /**
  * Cache decorator for functions
  */
-export function cached<T extends (...args: any[]) => Promise<any>>(
+export function cached<Args extends unknown[], Result>(
   keyPrefix: string,
   ttl?: number,
   tags?: string[]
 ) {
   return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
+    _target: unknown,
+    _propertyKey: string,
+    descriptor: TypedPropertyDescriptor<(...args: Args) => Promise<Result>>
   ) {
     const originalMethod = descriptor.value;
 
-    descriptor.value = async function (...args: any[]) {
+    if (!originalMethod) {
+      throw new Error("Cache decorator requires a method implementation.");
+    }
+
+    descriptor.value = async function (...args: Args) {
       // Generate cache key
       const cacheKey = defaultCache.generateKey(keyPrefix, ...args);
 
       // Try to get from cache
-      const cachedResult = defaultCache.get(cacheKey);
+      const cachedResult = defaultCache.get<Result>(cacheKey);
       if (cachedResult !== null) {
         return cachedResult;
       }
